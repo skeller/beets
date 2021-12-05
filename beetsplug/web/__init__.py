@@ -333,7 +333,8 @@ def item_file(item_id):
 @app.route('/item/query/<query:queries>', methods=["GET", "DELETE", "PATCH"])
 @resource_query('items', patchable=True)
 def item_query(queries):
-    return g.lib.items(queries)
+    #print(("queries: %r" % queries))
+    return g.lib.items(queries[0].split(","))
 
 
 @app.route('/item/path/<everything:path>')
@@ -375,7 +376,8 @@ def all_albums():
 @app.route('/album/query/<query:queries>', methods=["GET", "DELETE"])
 @resource_query('albums')
 def album_query(queries):
-    return g.lib.albums(queries)
+    #queries[0] = queries[0].replace(",", " ")
+    return g.lib.albums(queries[0].split(","))
 
 
 @app.route('/album/<int:album_id>/art')
